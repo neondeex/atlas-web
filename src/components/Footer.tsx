@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Github, Linkedin } from 'lucide-react';
+import { MessageCircle, Globe, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export const Footer = () => {
@@ -59,15 +59,15 @@ export const Footer = () => {
           </div>
           <div className="flex space-x-6">
             <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Twitter className="h-5 w-5" />
+              <MessageCircle className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </Link>
             <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Github className="h-5 w-5" />
+              <Globe className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
             <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Linkedin className="h-5 w-5" />
+              <LinkIcon className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
           </div>

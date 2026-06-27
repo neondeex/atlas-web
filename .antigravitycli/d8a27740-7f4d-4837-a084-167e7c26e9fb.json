@@ -1,0 +1,14 @@
+{
+  "id": "d8a27740-7f4d-4837-a084-167e7c26e9fb",
+  "name": "/home/neondeex/dev/git/ai-website-cloner-template",
+  "projectResources": {
+    "resources": [
+      {
+        "gitFolder": {
+          "folderUri": "file:///home/neondeex/dev/git/ai-website-cloner-template",
+          "allowWrite": true
+        }
+      }
+    ]
+  }
+}

@@ -22,7 +22,7 @@ export const Footer = () => {
             className="relative z-10 px-8 py-4 bg-foreground text-background font-semibold rounded-lg hover:opacity-90 transition-all text-lg flex items-center justify-center gap-2 mx-auto"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 3.449L9.75 2.1v9.181H0V3.449zM10.949 1.932L24 0v11.161H10.949V1.932zM0 12.355h9.75v9.181L0 20.203v-7.848zM10.949 12.355H24v11.161l-13.051-1.805v-9.356z"/></svg>
-            Download for Windows
+            Pre-order for Windows
           </button>
         </div>
 

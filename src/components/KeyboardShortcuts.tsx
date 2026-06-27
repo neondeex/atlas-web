@@ -72,50 +72,50 @@ export function KeyboardShortcuts() {
         {/* Simplified Keyboard Grid - Windows Layout */}
         <div className="grid grid-cols-12 gap-2 md:gap-4 w-full aspect-[2.5/1]">
           {/* Row 1 */}
-          <Key id="tab" isActive={activeKeys.includes("tab")} label="Tab" className="col-span-2" activeKeys={activeKeys} />
-          <Key id="q" isActive={activeKeys.includes("q")} label="Q" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="w" isActive={activeKeys.includes("w")} label="W" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="e" isActive={activeKeys.includes("e")} label="E" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="r" isActive={activeKeys.includes("r")} label="R" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="t" isActive={activeKeys.includes("t")} label="T" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="y" isActive={activeKeys.includes("y")} label="Y" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="u" isActive={activeKeys.includes("u")} label="U" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="i" isActive={activeKeys.includes("i")} label="I" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="o" isActive={activeKeys.includes("o")} label="O" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="p" isActive={activeKeys.includes("p")} label="P" className="col-span-1" activeKeys={activeKeys} />
+          <Key id="tab" isActive={activeKeys.includes("tab")} label="Tab" className="col-span-2" />
+          <Key id="q" isActive={activeKeys.includes("q")} label="Q" className="col-span-1" />
+          <Key id="w" isActive={activeKeys.includes("w")} label="W" className="col-span-1" />
+          <Key id="e" isActive={activeKeys.includes("e")} label="E" className="col-span-1" />
+          <Key id="r" isActive={activeKeys.includes("r")} label="R" className="col-span-1" />
+          <Key id="t" isActive={activeKeys.includes("t")} label="T" className="col-span-1" />
+          <Key id="y" isActive={activeKeys.includes("y")} label="Y" className="col-span-1" />
+          <Key id="u" isActive={activeKeys.includes("u")} label="U" className="col-span-1" />
+          <Key id="i" isActive={activeKeys.includes("i")} label="I" className="col-span-1" />
+          <Key id="o" isActive={activeKeys.includes("o")} label="O" className="col-span-1" />
+          <Key id="p" isActive={activeKeys.includes("p")} label="P" className="col-span-1" />
 
           {/* Row 2 */}
-          <Key id="caps" isActive={activeKeys.includes("caps")} label="Caps" className="col-span-2 md:col-span-2" activeKeys={activeKeys} />
-          <Key id="a" isActive={activeKeys.includes("a")} label="A" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="s" isActive={activeKeys.includes("s")} label="S" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="d" isActive={activeKeys.includes("d")} label="D" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="f" isActive={activeKeys.includes("f")} label="F" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="g" isActive={activeKeys.includes("g")} label="G" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="h" isActive={activeKeys.includes("h")} label="H" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="j" isActive={activeKeys.includes("j")} label="J" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="k" isActive={activeKeys.includes("k")} label="K" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="l" isActive={activeKeys.includes("l")} label="L" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="enter" isActive={activeKeys.includes("enter")} label="Enter" className="col-span-1 md:col-span-1" activeKeys={activeKeys} />
+          <Key id="caps" isActive={activeKeys.includes("caps")} label="Caps" className="col-span-2 md:col-span-2" />
+          <Key id="a" isActive={activeKeys.includes("a")} label="A" className="col-span-1" />
+          <Key id="s" isActive={activeKeys.includes("s")} label="S" className="col-span-1" />
+          <Key id="d" isActive={activeKeys.includes("d")} label="D" className="col-span-1" />
+          <Key id="f" isActive={activeKeys.includes("f")} label="F" className="col-span-1" />
+          <Key id="g" isActive={activeKeys.includes("g")} label="G" className="col-span-1" />
+          <Key id="h" isActive={activeKeys.includes("h")} label="H" className="col-span-1" />
+          <Key id="j" isActive={activeKeys.includes("j")} label="J" className="col-span-1" />
+          <Key id="k" isActive={activeKeys.includes("k")} label="K" className="col-span-1" />
+          <Key id="l" isActive={activeKeys.includes("l")} label="L" className="col-span-1" />
+          <Key id="enter" isActive={activeKeys.includes("enter")} label="Enter" className="col-span-1 md:col-span-1" />
 
           {/* Row 3 */}
-          <Key id="shift" isActive={activeKeys.includes("shift")} label="Shift" className="col-span-3" activeKeys={activeKeys} />
-          <Key id="z" isActive={activeKeys.includes("z")} label="Z" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="x" isActive={activeKeys.includes("x")} label="X" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="c" isActive={activeKeys.includes("c")} label="C" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="v" isActive={activeKeys.includes("v")} label="V" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="b" isActive={activeKeys.includes("b")} label="B" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="n" isActive={activeKeys.includes("n")} label="N" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="m" isActive={activeKeys.includes("m")} label="M" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="shift-r" isActive={activeKeys.includes("shift-r")} label="Shift" className="col-span-2" activeKeys={activeKeys} />
+          <Key id="shift" isActive={activeKeys.includes("shift")} label="Shift" className="col-span-3" />
+          <Key id="z" isActive={activeKeys.includes("z")} label="Z" className="col-span-1" />
+          <Key id="x" isActive={activeKeys.includes("x")} label="X" className="col-span-1" />
+          <Key id="c" isActive={activeKeys.includes("c")} label="C" className="col-span-1" />
+          <Key id="v" isActive={activeKeys.includes("v")} label="V" className="col-span-1" />
+          <Key id="b" isActive={activeKeys.includes("b")} label="B" className="col-span-1" />
+          <Key id="n" isActive={activeKeys.includes("n")} label="N" className="col-span-1" />
+          <Key id="m" isActive={activeKeys.includes("m")} label="M" className="col-span-1" />
+          <Key id="shift-r" isActive={activeKeys.includes("shift-r")} label="Shift" className="col-span-2" />
 
           {/* Row 4 (Windows Bottom Row Layout) */}
-          <Key id="ctrl" isActive={activeKeys.includes("ctrl")} label="Ctrl" className="col-span-1" activeKeys={activeKeys} />
-          <Key id="win" isActive={activeKeys.includes("win")} label="" className="col-span-1" icon={<LayoutGrid className="w-4 h-4 opacity-70" />} activeKeys={activeKeys} />
-          <Key id="alt" isActive={activeKeys.includes("alt")} label="Alt" className="col-span-2" activeKeys={activeKeys} />
-          <Key id="space" isActive={activeKeys.includes("space")} label="Space" className="col-span-4" activeKeys={activeKeys} />
-          <Key id="alt-r" isActive={activeKeys.includes("alt-r")} label="Alt" className="col-span-2" activeKeys={activeKeys} />
-          <Key id="win-r" isActive={activeKeys.includes("win-r")} label="" className="col-span-1" icon={<LayoutGrid className="w-4 h-4 opacity-70" />} activeKeys={activeKeys} />
-          <Key id="ctrl-r" isActive={activeKeys.includes("ctrl-r")} label="Ctrl" className="col-span-1" activeKeys={activeKeys} />
+          <Key id="ctrl" isActive={activeKeys.includes("ctrl")} label="Ctrl" className="col-span-1" />
+          <Key id="win" isActive={activeKeys.includes("win")} label="" className="col-span-1" icon={<LayoutGrid className="w-4 h-4 opacity-70" />} />
+          <Key id="alt" isActive={activeKeys.includes("alt")} label="Alt" className="col-span-2" />
+          <Key id="space" isActive={activeKeys.includes("space")} label="Space" className="col-span-4" />
+          <Key id="alt-r" isActive={activeKeys.includes("alt-r")} label="Alt" className="col-span-2" />
+          <Key id="win-r" isActive={activeKeys.includes("win-r")} label="" className="col-span-1" icon={<LayoutGrid className="w-4 h-4 opacity-70" />} />
+          <Key id="ctrl-r" isActive={activeKeys.includes("ctrl-r")} label="Ctrl" className="col-span-1" />
         </div>
       </div>
     </section>

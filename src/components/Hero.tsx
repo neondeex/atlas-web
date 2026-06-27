@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, FormEvent } from "react";
 import gsap from "gsap";
+import { Turnstile } from '@marsidev/react-turnstile';
 import EarlyBeta from "./EarlyBeta";
 import { ShimmerButton } from "./ui/shimmer-button";
 import { TypingAnimation } from "./ui/typing-animation";
@@ -11,6 +12,41 @@ import { BorderBeam } from "./ui/border-beam";
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isBetaOpen, setIsBetaOpen] = useState(false);
+  
+  // Waitlist form state
+  const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleWaitlistSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (status === "loading" || status === "success") return;
+    
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, honeypot, turnstileToken }),
+      });
+
+      const data = await res.json();
+      
+      if (data.success) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+        setErrorMessage(data.error || "Failed to join waitlist");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
+  };
 
   useEffect(() => {
     const handleOpenBeta = () => setIsBetaOpen(true);
@@ -126,6 +162,9 @@ export default function Hero() {
       </div>
 
       <div className="max-w-4xl mx-auto text-center space-y-8 z-10">
+        <div className="hero-anim inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300">
+          <span className="text-[#e57324]">⚡</span> Built with Rust • 0.1ms search latency
+        </div>
         <h1 className="hero-anim text-5xl md:text-7xl font-bold tracking-tight text-foreground">
           The ultimate file manager.
         </h1>
@@ -135,17 +174,69 @@ export default function Hero() {
           delay={500}
         />
         
-        <div className="hero-anim flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-          <ShimmerButton onClick={() => setIsBetaOpen(true)} className="w-full sm:w-auto px-8 py-4 font-semibold text-lg flex items-center justify-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 3.449L9.75 2.1v9.181H0V3.449zM10.949 1.932L24 0v11.161H10.949V1.932zM0 12.355h9.75v9.181L0 20.203v-7.848zM10.949 12.355H24v11.161l-13.051-1.805v-9.356z"/></svg>
-            Download for Windows
-          </ShimmerButton>
+        <div className="hero-anim flex flex-col items-center justify-center gap-4 pt-8 w-full max-w-md mx-auto">
+          {status === "success" ? (
+            <div className="w-full px-4 py-4 rounded-xl border border-green-500/30 bg-green-500/10 text-green-400 font-medium text-center">
+              🎉 You're on the list! We'll be in touch soon.
+            </div>
+          ) : (
+            <form className="flex w-full items-center space-x-2 relative" onSubmit={handleWaitlistSubmit}>
+              {/* Invisible Honeypot to catch bots */}
+              <input 
+                type="text" 
+                name="name_confirm" 
+                className="hidden absolute top-0 left-0" 
+                value={honeypot} 
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1} 
+                autoComplete="off" 
+              />
+              
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status === "loading"}
+                className="flex-1 px-4 py-4 rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-foreground/50 transition-all placeholder:text-zinc-500 disabled:opacity-50"
+                required
+              />
+              <button 
+                type="submit" 
+                disabled={status === "loading"}
+                className="px-6 py-4 font-semibold text-background bg-foreground rounded-xl hover:opacity-90 transition-all whitespace-nowrap disabled:opacity-50"
+              >
+                {status === "loading" ? "Joining..." : "Join Waitlist"}
+              </button>
+            </form>
+          )}
+
+          {status === "error" && (
+            <div className="text-red-400 text-sm font-medium">{errorMessage}</div>
+          )}
+
+          {/* Cloudflare Turnstile Widget - Only renders if NEXT_PUBLIC_TURNSTILE_SITE_KEY is set */}
+          {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && status !== "success" && (
+            <div className="mt-2">
+              <Turnstile 
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} 
+                onSuccess={(token) => setTurnstileToken(token)}
+                options={{ theme: 'dark', size: 'flexible' }}
+              />
+            </div>
+          )}
+          
+          <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground mt-2">
+            <button onClick={() => setIsBetaOpen(true)} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
+              Or download v0.0.1 Beta
+            </button>
+          </div>
         </div>
 
-        <div className="hero-anim flex items-center justify-center gap-4 text-sm text-muted-foreground pt-4">
-          <span>v0.0.1 Beta</span>
-          <span className="w-1 h-1 rounded-full bg-muted-foreground/50" />
-          <span>Windows 10/11</span>
+        <div className="hero-anim flex items-center justify-center gap-2 text-sm text-muted-foreground pt-4">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span className="font-medium">100% Local & Private.</span>
+          <span className="opacity-70">Atlas never uploads your files.</span>
         </div>
       </div>
       

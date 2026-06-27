@@ -2,7 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
-
+import { UseCases } from "@/components/UseCases";
+import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -12,7 +13,8 @@ export default function Home() {
       <Hero />
       <Features />
       <KeyboardShortcuts />
-
+      <UseCases />
+      <FAQ />
       <Footer />
     </main>
   );

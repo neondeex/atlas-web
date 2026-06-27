@@ -16,7 +16,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-[90] flex justify-center p-4 pointer-events-none">
       <nav 
         className={cn(
           "pointer-events-auto flex items-center justify-between overflow-hidden",

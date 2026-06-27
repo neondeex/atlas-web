@@ -228,7 +228,6 @@ export default function Hero() {
         <div className="hero-anim flex items-center justify-center gap-2 text-sm text-muted-foreground pt-4">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           <span className="font-medium">100% Local & Private.</span>
-          <span className="opacity-70">Atlas never uploads your files.</span>
         </div>
       </div>
       

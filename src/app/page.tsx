@@ -6,6 +6,7 @@ import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 import { UseCases } from "@/components/UseCases";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
+import EarlyBeta from "@/components/EarlyBeta";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <UseCases />
       <FAQ />
       <Footer />
+      <EarlyBeta />
     </main>
   );
 }

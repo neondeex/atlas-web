@@ -4,14 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState, FormEvent } from "react";
 import gsap from "gsap";
 import { Turnstile } from '@marsidev/react-turnstile';
-import EarlyBeta from "./EarlyBeta";
 import { ShimmerButton } from "./ui/shimmer-button";
 import { TypingAnimation } from "./ui/typing-animation";
 import { BorderBeam } from "./ui/border-beam";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isBetaOpen, setIsBetaOpen] = useState(false);
   
   // Waitlist form state
   const [email, setEmail] = useState("");
@@ -47,12 +45,6 @@ export default function Hero() {
       setErrorMessage("Network error. Please try again.");
     }
   };
-
-  useEffect(() => {
-    const handleOpenBeta = () => setIsBetaOpen(true);
-    window.addEventListener('open-early-beta', handleOpenBeta);
-    return () => window.removeEventListener('open-early-beta', handleOpenBeta);
-  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -227,7 +219,7 @@ export default function Hero() {
           )}
           
           <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground mt-2">
-            <button onClick={() => setIsBetaOpen(true)} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
+            <button onClick={() => window.dispatchEvent(new CustomEvent('open-early-beta'))} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
               Or pre-order v0.0.1 Beta
             </button>
           </div>
@@ -249,8 +241,6 @@ export default function Hero() {
           <BorderBeam size={400} duration={12} delay={9} />
         </div>
       </div>
-      
-      <EarlyBeta isOpen={isBetaOpen} onClose={() => setIsBetaOpen(false)} />
     </section>
   );
 }

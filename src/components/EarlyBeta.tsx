@@ -7,16 +7,20 @@ import gsap from "gsap";
 import { PolarEmbedCheckout } from "@polar-sh/checkout/embed";
 import { BorderBeam } from "./ui/border-beam";
 
-interface EarlyBetaProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function EarlyBeta({ isOpen, onClose }: EarlyBetaProps) {
+export default function EarlyBeta() {
+  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-early-beta', handleOpen);
+    return () => window.removeEventListener('open-early-beta', handleOpen);
+  }, []);
+
+  const onClose = () => setIsOpen(false);
 
   // Discount timer logic
   // Target date is 30 days from 2026-06-26T17:46:29-06:00 -> 2026-07-26T17:46:29-06:00

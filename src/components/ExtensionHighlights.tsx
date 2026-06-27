@@ -166,20 +166,6 @@ export const ExtensionHighlights = () => {
           <h2 className="ext-header text-5xl md:text-6xl font-bold tracking-tight text-foreground">
             Plugins & Integrations
           </h2>
-          <div className="ext-header flex flex-wrap items-center gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border ${
-                  cat.active 
-                    ? 'bg-foreground text-background border-foreground shadow-[0_0_20px_rgba(255,255,255,0.1)]' 
-                    : 'bg-secondary/30 text-muted-foreground border-border hover:text-foreground hover:bg-secondary/80'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

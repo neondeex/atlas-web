@@ -228,7 +228,7 @@ export default function Hero() {
           
           <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground mt-2">
             <button onClick={() => setIsBetaOpen(true)} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
-              Or download v0.0.1 Beta
+              Or pre-order v0.0.1 Beta
             </button>
           </div>
         </div>

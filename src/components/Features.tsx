@@ -156,6 +156,26 @@ export default function Features() {
           </div>
         ))}
       </div>
+
+      {/* Extra Textual Features */}
+      <div className="mt-16 flex flex-wrap justify-center items-center gap-x-6 gap-y-4 max-w-4xl mx-auto text-sm md:text-base font-medium text-muted-foreground/80">
+        <div className="flex items-center gap-2">
+          <span className="text-white/20">•</span>
+          <span>Multiple Profiles & Sessions</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-white/20">•</span>
+          <span>Rich Color Themes</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-white/20">•</span>
+          <span>Silky Smooth Animations</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-white/20">•</span>
+          <span>Searchable Context Menus</span>
+        </div>
+      </div>
     </section>
   );
 }

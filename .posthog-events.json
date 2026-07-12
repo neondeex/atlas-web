@@ -1,0 +1,57 @@
+[
+  {
+    "event_name": "waitlist_joined",
+    "event_description": "User successfully submitted the hero waitlist form with their email.",
+    "file": "src/components/Hero.tsx"
+  },
+  {
+    "event_name": "pre_order_clicked",
+    "event_description": "User clicked the pre-order button to open the Early Beta modal.",
+    "file": "src/components/Hero.tsx"
+  },
+  {
+    "event_name": "community_clicked",
+    "event_description": "User clicked the Discord community link in the navbar.",
+    "file": "src/components/Navbar.tsx"
+  },
+  {
+    "event_name": "early_beta_modal_opened",
+    "event_description": "The Early Beta purchase modal was opened.",
+    "file": "src/components/EarlyBeta.tsx"
+  },
+  {
+    "event_name": "checkout_initiated",
+    "event_description": "User clicked the Buy Early Access button to start the Polar checkout flow.",
+    "file": "src/components/EarlyBeta.tsx"
+  },
+  {
+    "event_name": "faq_question_expanded",
+    "event_description": "User expanded a FAQ item to read the answer.",
+    "file": "src/components/FAQ.tsx"
+  },
+  {
+    "event_name": "footer_pre_order_clicked",
+    "event_description": "User clicked the pre-order CTA in the footer section.",
+    "file": "src/components/Footer.tsx"
+  },
+  {
+    "event_name": "checkout_session_created",
+    "event_description": "Server successfully created a Polar checkout session for a product.",
+    "file": "src/app/api/checkout/route.ts"
+  },
+  {
+    "event_name": "waitlist_signup_completed",
+    "event_description": "Server processed a valid waitlist signup and forwarded it to Discord.",
+    "file": "src/app/api/waitlist/route.ts"
+  },
+  {
+    "event_name": "checkout_error",
+    "event_description": "Server encountered an error while creating a Polar checkout session.",
+    "file": "src/app/api/checkout/route.ts"
+  },
+  {
+    "event_name": "waitlist_error",
+    "event_description": "Server encountered an error while processing a waitlist signup.",
+    "file": "src/app/api/waitlist/route.ts"
+  }
+]

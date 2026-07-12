@@ -13,8 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Atlas - Your shortcut to everything",
-  description: "A collection of powerful productivity tools all within an extendable launcher.",
+  title: "Atlas - The modern file manager",
+  description: "A blazing fast, extendable file manager designed for modern workflows.",
+  openGraph: {
+    title: "Atlas - The modern file manager",
+    description: "A blazing fast, extendable file manager designed for modern workflows.",
+    url: "https://atlas-filemanager.com", // update to actual domain
+    siteName: "Atlas",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Atlas - The modern file manager",
+    description: "A blazing fast, extendable file manager designed for modern workflows.",
+  },
   icons: {
     icon: "/favicon-production.png", // Wait, I'll just leave it default for now and add favicon later if needed
   }

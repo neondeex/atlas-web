@@ -2,7 +2,7 @@
   "name": "atlas",
   "version": "0.3.1",
   "private": true,
-  "description": "Atlas - Your shortcut to everything",
+  "description": "Atlas - The modern file manager",
   "author": "JCodesMore",
   "license": "MIT",
   "repository": {
@@ -16,7 +16,7 @@
   "keywords": [
     "atlas",
     "productivity",
-    "launcher",
+    "file-manager",
     "nextjs",
     "tailwindcss",
     "shadcn-ui"
@@ -43,6 +43,8 @@
     "gsap": "^3.15.0",
     "lucide-react": "^1.6.0",
     "next": "16.2.1",
+    "posthog-js": "^1.399.2",
+    "posthog-node": "^5.41.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "shadcn": "^4.1.0",

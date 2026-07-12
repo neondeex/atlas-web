@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import posthog from 'posthog-js';
 
 const faqs = [
   {
@@ -44,7 +45,13 @@ export function FAQ() {
               className="border border-white/10 rounded-2xl bg-secondary/10 overflow-hidden transition-all duration-300"
             >
               <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                onClick={() => {
+                  const next = openIndex === index ? null : index;
+                  if (next !== null) {
+                    posthog.capture('faq_question_expanded', { question: faq.question });
+                  }
+                  setOpenIndex(next);
+                }}
                 className="flex items-center justify-between w-full p-6 text-left"
               >
                 <span className="font-semibold text-lg">{faq.question}</span>

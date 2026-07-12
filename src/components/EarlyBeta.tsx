@@ -3,11 +3,13 @@
 import { Check, Key, ArrowRight, X, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePostHog } from 'posthog-js/react';
 import gsap from "gsap";
 import { PolarEmbedCheckout } from "@polar-sh/checkout/embed";
 import { BorderBeam } from "./ui/border-beam";
 
 export default function EarlyBeta() {
+  const posthog = usePostHog();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -15,10 +17,13 @@ export default function EarlyBeta() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
+    const handleOpen = () => {
+      setIsOpen(true);
+      posthog.capture('early_beta_modal_opened');
+    };
     window.addEventListener('open-early-beta', handleOpen);
     return () => window.removeEventListener('open-early-beta', handleOpen);
-  }, []);
+  }, [posthog]);
 
   const onClose = () => setIsOpen(false);
 
@@ -65,7 +70,11 @@ export default function EarlyBeta() {
     setIsLoading(true);
     fetch('/api/checkout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-POSTHOG-DISTINCT-ID': posthog.get_distinct_id(),
+        'X-POSTHOG-SESSION-ID': posthog.get_session_id() ?? '',
+      },
       body: JSON.stringify({ productId: '8d10e900-4577-40cb-8bd7-1f148501c49b' })
     })
       .then(res => res.json())
@@ -74,7 +83,7 @@ export default function EarlyBeta() {
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
-  }, [isOpen, checkoutUrl]);
+  }, [isOpen, checkoutUrl, posthog]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -223,10 +232,11 @@ export default function EarlyBeta() {
                   Loading checkout...
                 </button>
               ) : checkoutUrl ? (
-                <a 
-                  href={checkoutUrl} 
-                  data-polar-checkout 
+                <a
+                  href={checkoutUrl}
+                  data-polar-checkout
                   data-polar-checkout-theme="dark"
+                  onClick={() => posthog.capture('checkout_initiated', { price: isDiscountActive ? 9.99 : 19.99 })}
                   className="relative z-10 w-full py-4 bg-white hover:bg-zinc-200 text-black font-bold rounded-xl transition-all flex items-center justify-center gap-2 group text-base"
                 >
                   Buy Early Access

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function POST(req: Request) {
   try {
@@ -55,9 +56,26 @@ export async function POST(req: Request) {
       console.log(`[Waitlist] New signup received: ${email} (Configure DISCORD_WEBHOOK_URL to send to Discord)`);
     }
 
+    const distinctId = req.headers.get('X-POSTHOG-DISTINCT-ID') || 'anonymous';
+    const sessionId = req.headers.get('X-POSTHOG-SESSION-ID');
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId,
+      event: 'waitlist_signup_completed',
+      properties: {
+        source: 'hero_form',
+        ...(sessionId ? { $session_id: sessionId } : {}),
+      },
+    });
+    await posthog.flush();
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Waitlist API error:", error);
+    const errorDistinctId = req.headers.get('X-POSTHOG-DISTINCT-ID') || 'anonymous';
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: errorDistinctId, event: 'waitlist_error', properties: { error: String(error) } });
+    await posthog.flush();
     return NextResponse.json({ success: false, error: "Server error" }, { status: 500 });
   }
 }

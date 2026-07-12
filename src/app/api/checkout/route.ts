@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Polar } from '@polar-sh/sdk';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 const polar = new Polar({
   // The token should be in .env.local
@@ -25,9 +26,23 @@ export async function POST(request: Request) {
       products: [productId],
     });
 
+    const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') || 'anonymous';
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId,
+      event: 'checkout_session_created',
+      properties: { productId },
+    });
+    await posthog.flush();
+
     return NextResponse.json({ url: checkout.url });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Polar Checkout Error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const errorDistinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') || 'anonymous';
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: errorDistinctId, event: 'checkout_error', properties: { error: errorMessage } });
+    await posthog.flush();
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, FormEvent } from "react";
+import { usePostHog } from 'posthog-js/react';
 import gsap from "gsap";
 import { Turnstile } from '@marsidev/react-turnstile';
 import { ShimmerButton } from "./ui/shimmer-button";
@@ -9,6 +10,7 @@ import { TypingAnimation } from "./ui/typing-animation";
 import { BorderBeam } from "./ui/border-beam";
 
 export default function Hero() {
+  const posthog = usePostHog();
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Waitlist form state
@@ -28,7 +30,11 @@ export default function Hero() {
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-POSTHOG-DISTINCT-ID": posthog?.get_distinct_id() ?? '',
+          "X-POSTHOG-SESSION-ID": posthog?.get_session_id() ?? '',
+        },
         body: JSON.stringify({ email, honeypot, turnstileToken }),
       });
 
@@ -36,6 +42,8 @@ export default function Hero() {
       
       if (data.success) {
         setStatus("success");
+        posthog?.identify(email, { $set: { waitlist_joined: true } });
+        posthog?.capture("waitlist_joined");
       } else {
         setStatus("error");
         setErrorMessage(data.error || "Failed to join waitlist");
@@ -219,7 +227,7 @@ export default function Hero() {
           )}
           
           <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground mt-2">
-            <button onClick={() => window.dispatchEvent(new CustomEvent('open-early-beta'))} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
+            <button onClick={() => { posthog?.capture('pre_order_clicked'); window.dispatchEvent(new CustomEvent('open-early-beta')); }} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">
               Or pre-order v0.0.1 Beta
             </button>
           </div>

@@ -1,10 +1,12 @@
 "use client";
 
 import React from 'react';
+import { usePostHog } from 'posthog-js/react';
 import { MessageCircle, Globe, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export const Footer = () => {
+  const posthog = usePostHog();
   return (
     <footer className="bg-background text-foreground py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -17,8 +19,11 @@ export const Footer = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-10">
             Join thousands of professionals who have completely changed the way they interact with their file system.
           </p>
-          <button 
-            onClick={() => window.dispatchEvent(new CustomEvent('open-early-beta'))}
+          <button
+            onClick={() => {
+              posthog.capture('footer_pre_order_clicked');
+              window.dispatchEvent(new CustomEvent('open-early-beta'));
+            }}
             className="relative z-10 px-8 py-4 bg-foreground text-background font-semibold rounded-lg hover:opacity-90 transition-all text-lg flex items-center justify-center gap-2 mx-auto"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 3.449L9.75 2.1v9.181H0V3.449zM10.949 1.932L24 0v11.161H10.949V1.932zM0 12.355h9.75v9.181L0 20.203v-7.848zM10.949 12.355H24v11.161l-13.051-1.805v-9.356z"/></svg>

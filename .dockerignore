@@ -27,7 +27,7 @@ Thumbs.db
 *.swp
 *.swo
 
-# Agent / AI tool configs (not needed at runtime)
+
 .claude
 .codex
 .cursor
